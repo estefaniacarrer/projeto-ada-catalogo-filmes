@@ -1,5 +1,6 @@
 package org.filmes.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,7 @@ public class Filme {
 
     private String nome;
     private Date dataLancamento;
-    private  double orcamento;
+    private double orcamento;
     private String descricao;
     private Diretores diretores;
     private List<Atores> atores = new ArrayList<>();
@@ -71,5 +72,21 @@ public class Filme {
 
     public void setAtores(List<Atores> atores) {
         this.atores = atores;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome: ").append(nome).append("\n");
+        sb.append("Data de Lançamento: ").append(sdf.format(dataLancamento)).append("\n");
+        sb.append("Orçamento: ").append(orcamento).append("\n");
+        sb.append("Descrição: ").append(descricao).append("\n");
+        sb.append("Diretor: ").append(diretores.getNome()).append("\n");
+        sb.append("Atores:\n");
+        for (Atores ator : atores) {
+            sb.append("- ").append(ator.getNome()).append("\n");
+        }
+        return sb.toString();
     }
 }
