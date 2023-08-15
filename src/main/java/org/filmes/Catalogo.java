@@ -14,7 +14,7 @@ public class Catalogo  implements PagedList {
         filmes = new ArrayList<>();
     }
 
-    public void adicionarFilmes(List<Filme> novosFilmes) {
+    public void adicionarListaDeFilmes(List<Filme> novosFilmes) {
         filmes.addAll(novosFilmes);
     }
     @Override

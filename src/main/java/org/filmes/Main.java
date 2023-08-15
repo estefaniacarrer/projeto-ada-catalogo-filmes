@@ -12,7 +12,7 @@ public class Main {
         Catalogo catalogo = new Catalogo();
 
         List<Filme> filmesDeExemplo = FilmesCadastrados.listagemDeFilmes();
-        catalogo.adicionarFilmes(filmesDeExemplo);
+        catalogo.adicionarListaDeFilmes(filmesDeExemplo);
 
 
         BasicUI ui = new PagedListUI("Catalogo de filmes", catalogo);
