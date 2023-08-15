@@ -29,10 +29,10 @@ public class FilmesCadastrados {
         atoresFilme2.add(ator3);
         atoresFilme2.add(ator4);
 
-        Filme filme1 = new Filme("A Origem", parseDate("2010-08-06"), 160000000,
+        Filme filme1 = new Filme("A Origem", parseDate("2010-08-06"), "160 Milhões",
                 "Dom Cobb é um ladrão com a rara habilidade de roubar segredos do inconsciente, obtidos durante o estado de sono. Impedido de retornar para sua família, ele recebe a oportunidade de se redimir ao realizar uma tarefa aparentemente impossível: plantar uma ideia na mente do herdeiro de um império. Para realizar o crime perfeito, ele conta com a ajuda do parceiro Arthur, o discreto Eames e a arquiteta de sonhos Ariadne. Juntos, eles correm para que o inimigo não antecipe seus passos.",
                 diretor1, atoresFilme1);
-        Filme filme2 = new Filme("Avatar", parseDate("2009-12-18"), 237000000,
+        Filme filme2 = new Filme("Avatar", parseDate("2009-12-18"), "237 Milhões",
                 "No exuberante mundo alienígena de Pandora vivem os Na'vi, seres que parecem ser primitivos, mas são altamente evoluídos. Como o ambiente do planeta é tóxico, foram criados os avatares, corpos biológicos controlados pela mente humana que se movimentam livremente em Pandora. Jake Sully, um ex-fuzileiro naval paralítico, volta a andar através de um avatar e se apaixona por uma Na'vi. Esta paixão leva Jake a lutar pela sobrevivência de Pandora",
                 diretor2, atoresFilme2);
 

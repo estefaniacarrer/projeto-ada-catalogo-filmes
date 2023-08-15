@@ -9,7 +9,7 @@ public class Filme {
 
     private String nome;
     private Date dataLancamento;
-    private double orcamento;
+    private String orcamento;
     private String descricao;
     private Diretores diretores;
     private List<Atores> atores = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Filme {
     public Filme() {
     }
 
-    public Filme(String nome, Date dataLancamento, double orcamento, String descricao, Diretores diretores, List<Atores> atores) {
+    public Filme(String nome, Date dataLancamento, String orcamento, String descricao, Diretores diretores, List<Atores> atores) {
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.orcamento = orcamento;
@@ -42,11 +42,11 @@ public class Filme {
         this.dataLancamento = dataLancamento;
     }
 
-    public double getOrcamento() {
+    public String getOrcamento() {
         return orcamento;
     }
 
-    public void setOrcamento(double orcamento) {
+    public void setOrcamento(String orcamento) {
         this.orcamento = orcamento;
     }
 
