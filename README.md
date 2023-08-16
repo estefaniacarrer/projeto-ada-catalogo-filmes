@@ -1,4 +1,5 @@
-# Projeto AdaTech Catalogo Filmes  
+# Projeto AdaTech Catalogo Filmes
+Modulo 2 - Programação Orientada a Objetos
 
 # Objetivo:
 
