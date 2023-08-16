@@ -6,6 +6,8 @@ import org.filmes.util.ConsoleUIHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.filmes.util.ConsoleUIHelper.drawWithRightPadding;
+
 public class PagedListUI extends BasicUI {
     protected final int PAGE_SIZE;
     protected int curPage;
@@ -21,7 +23,7 @@ public class PagedListUI extends BasicUI {
 
     public PagedListUI(int colunas, int linhas, String titulo, PagedList pageSource) {
         super(colunas, linhas, titulo);
-        PAGE_SIZE = 1;
+        PAGE_SIZE = 2;
         curPage = 1;
         this.pageSource = pageSource;
     }
@@ -30,16 +32,20 @@ public class PagedListUI extends BasicUI {
     public int drawContent() {
         dataList = pageSource.listarFilmes(curPage, PAGE_SIZE);
         totalPages = (int) Math.ceil((double) pageSource.totalFilmes() / PAGE_SIZE);
+
+        int count = 0;
         for (int i = 0; i < dataList.size(); i++) {
             Filme filme = dataList.get(i);
-            ConsoleUIHelper.drawWithRightPadding(i + " -> " + filme.toString(), colunas, ' ');
+            String formattedFilm = String.format("%d -> %s", i, filme.toString());
+            drawWithRightPadding(formattedFilm, colunas, ' ');
+            count++;
         }
-        return dataList.size();
+        return count;
     }
 
     @Override
     public int menuLines() {
-        return 6;
+        return 9;
     }
 
     @Override
@@ -91,14 +97,14 @@ public class PagedListUI extends BasicUI {
     }
 
     private void nextPage() {
-        curPage++;
-        show();
+        if (curPage < totalPages) {
+            curPage++;
+        }
     }
 
     private void previousPage() {
         if (curPage > 1) {
             curPage--;
-            show();
         }
     }
 
@@ -134,7 +140,7 @@ public class PagedListUI extends BasicUI {
             ConsoleUIHelper.clearScreen();
             ConsoleUIHelper.drawHeader("Filmes Encontrados:", colunas);
             for (Filme filme : resultados) {
-                ConsoleUIHelper.drawWithRightPadding(filme.toString(), colunas, ' ');
+                drawWithRightPadding(filme.toString(), colunas, ' ');
             }
             ConsoleUIHelper.waitForEnter("Pressione Enter para retornar ao menu principal...");
         }

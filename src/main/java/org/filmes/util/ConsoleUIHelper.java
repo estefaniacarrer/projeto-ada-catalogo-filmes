@@ -1,7 +1,9 @@
 package org.filmes.util;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUIHelper {
@@ -65,17 +67,26 @@ public class ConsoleUIHelper {
         return number;
     }
 
-    public static int drawWithRightPadding(String text, int width, char pad) {
-        int count = 0;
-        do {
-            int limit = Math.min(text.length(), width - 4);
-            String row = text.substring(0, limit);
-            text = text.substring(row.length());
-            row = row + String.valueOf(pad).repeat(width - row.length() - 4);
+    public static void drawWithRightPadding(String text, int width, char pad) {
+        String[] lines = text.split("\n");
+        for (String line : lines) {
+            while (line.length() > width - 7) {
+                int limit = Math.min(line.length(), width - 7);
+                String row = line.substring(0, limit);
+                row = "#  " + row + " ".repeat(width - row.length() - 7) + "   #";
+                System.out.println(row);
+                line = line.substring(limit);
+            }
+            String row = line;
+            row = "#  " + row + " ".repeat(width - row.length() - 7) + "   #";
             System.out.println(row);
-            count++;
-        } while (!text.isEmpty());
-        return count;
+
+        }
+    }
+
+    public static void drawFilmSeparator(int width) {
+        System.out.println("#".repeat(width));
+        System.out.println();
     }
 
     public static int drawWithPadding(String text, int width) {

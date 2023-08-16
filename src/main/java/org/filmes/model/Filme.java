@@ -87,6 +87,7 @@ public class Filme {
         for (Atores ator : atores) {
             sb.append("- ").append(ator.getNome()).append("\n");
         }
+        sb.append(" ");
         return sb.toString();
     }
 }
