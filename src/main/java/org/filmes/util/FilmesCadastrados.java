@@ -64,6 +64,46 @@ public class FilmesCadastrados {
         return filmes;
     }
 
+    public static List<Atores> listagemDeAtores() {
+        List<Atores> atores = new ArrayList<>();
+
+        Atores ator1 = new Atores("Leonardo DiCaprio", parseDate("1995-05-10"));
+        Atores ator2 = new Atores("Joseph Gordon", parseDate("1988-12-20"));
+        Atores ator3 = new Atores("Zoe Saldana", parseDate("1992-03-25"));
+        Atores ator4 = new Atores("Sam Worthington", parseDate("1985-03-27"));
+        Atores ator5 = new Atores("Robert Downey", parseDate("1986-09-11"));
+        Atores ator6 = new Atores("Gwyneth Paltrow", parseDate("1986-07-10"));
+        Atores ator7 = new Atores("Keanu Reeves", parseDate("1978-08-03"));
+        Atores ator8 = new Atores("Ian McShane", parseDate("1970-03-14"));
+
+        atores.add(ator1);
+        atores.add(ator2);
+        atores.add(ator3);
+        atores.add(ator4);
+        atores.add(ator5);
+        atores.add(ator6);
+        atores.add(ator7);
+        atores.add(ator8);
+
+        return atores;
+    }
+
+    public static List<Diretores> listagemDeDiretores() {
+        List<Diretores> diretores = new ArrayList<>();
+
+        Diretores diretor1 = new Diretores("Christopher Nolan", parseDate("1980-01-01"));
+        Diretores diretor2 = new Diretores("James Cameron", parseDate("1990-02-15"));
+        Diretores diretor3 = new Diretores("Shane Black", parseDate("1978-08-20"));
+        Diretores diretor4 = new Diretores("Chad Stahelski", parseDate("1980-09-23"));
+
+        diretores.add(diretor1);
+        diretores.add(diretor2);
+        diretores.add(diretor3);
+        diretores.add(diretor4);
+
+        return diretores;
+    }
+
     private static Date parseDate(String dateStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
