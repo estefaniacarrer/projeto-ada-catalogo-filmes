@@ -1,5 +1,6 @@
 package org.filmes.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Pessoa {
@@ -26,5 +27,12 @@ public class Pessoa {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dataNascimentoStr = sdf.format(dataNascimento);
+        return "Nome: " + nome + ", Data de Nascimento: " + dataNascimentoStr;
     }
 }

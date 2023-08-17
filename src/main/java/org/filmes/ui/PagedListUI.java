@@ -112,9 +112,13 @@ public class PagedListUI extends BasicUI {
     }
 
     private void cadastrarAtor() {
+        AtorListUI atorListUI = new AtorListUI();
+        atorListUI.show();
     }
 
     private void cadastrarDiretor() {
+        DiretorListUI diretorListUI = new DiretorListUI();
+        diretorListUI.show();
     }
 
     private void associarAtorDiretor() {
