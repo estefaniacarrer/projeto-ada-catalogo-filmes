@@ -127,7 +127,17 @@ public class PagedListUI extends BasicUI {
         Diretores diretor = new Diretores(nomeDiretor, dataNascimentoDiretor);
 
         List<Atores> atores = new ArrayList<>();
-        int numeroAtores = Integer.parseInt(ConsoleUIHelper.askSimpleInput("Digite o número de atores a serem cadastrados:"));
+
+        boolean numeroValido = false;
+        int numeroAtores=0;
+        while (!numeroValido) {
+            try {
+                numeroAtores = Integer.parseInt(ConsoleUIHelper.askSimpleInput("Digite o número de atores a serem cadastrados:"));
+                numeroValido = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, digite um número válido.");
+            }
+        }
 
         for (int i = 0; i < numeroAtores; i++) {
             String nomeAtor = ConsoleUIHelper.askSimpleInput("Digite o nome do ator " + (i + 1) + ":");
