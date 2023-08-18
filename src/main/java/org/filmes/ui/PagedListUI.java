@@ -4,6 +4,7 @@ import org.filmes.model.Atores;
 import org.filmes.model.Diretores;
 import org.filmes.model.Filme;
 import org.filmes.util.ConsoleUIHelper;
+import org.filmes.util.FilmesCadastrados;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -155,6 +156,73 @@ public class PagedListUI extends BasicUI {
     }
 
     private void associarAtorDiretor() {
+        String nomeFilme = ConsoleUIHelper.askSimpleInput("Digite o nome do filme que deseja associar atores e diretor:");
+        Filme filmeSelecionado = null;
+        for (Filme filme : dataList) {
+            if (filme.getNome().equalsIgnoreCase(nomeFilme)) {
+                filmeSelecionado = filme;
+                break;
+            }
+        }
+
+        if (filmeSelecionado != null) {
+            System.out.println("Associando atores e/ou diretor ao filme: " + filmeSelecionado.getNome());
+
+            boolean continuarAssociando = true;
+            while (continuarAssociando) {
+                int opcao = ConsoleUIHelper.askChooseOption(
+                        "Deseja associar um novo ator ou modificar um diretor?",
+                        "Associar Ator",
+                        "Modificar Diretor",
+                        "Sair");
+                switch (opcao) {
+                    case 0:
+                        String nomeAtor = ConsoleUIHelper.askSimpleInput("Digite o nome do ator que deseja associar:");
+                        Atores atorAssociado = encontrarAtorPorNome(nomeAtor);
+                        if (atorAssociado != null) {
+                            filmeSelecionado.getAtores().add(atorAssociado);
+                            System.out.println("Ator associado com sucesso!");
+                        } else {
+                            System.out.println("Ator não encontrado. Por favor, verifique o nome e tente novamente.");
+                        }
+                        break;
+                    case 1:
+                        String nomeDiretor = ConsoleUIHelper.askSimpleInput("Digite o nome do diretor que deseja associar:");
+                        Diretores diretorAssociado = encontrarDiretorPorNome(nomeDiretor);
+                        if (diretorAssociado != null) {
+                            filmeSelecionado.setDiretores(diretorAssociado);
+                            System.out.println("Diretor associado com sucesso!");
+                        } else {
+                            System.out.println("Diretor não encontrado. Por favor, verifique o nome e tente novamente.");
+                        }
+                        break;
+                    case 2:
+                        continuarAssociando = false;
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
+                }
+            }
+        } else {
+            ConsoleUIHelper.showMessageAndWait("Filme não encontrado.", 2);
+        }
+    }
+    private Atores encontrarAtorPorNome(String nome) {
+        for (Atores ator : FilmesCadastrados.listagemDeAtores()) {
+            if (ator.getNome().equalsIgnoreCase(nome)) {
+                return ator;
+            }
+        }
+        return null;
+    }
+
+    private Diretores encontrarDiretorPorNome(String nome) {
+        for (Diretores diretor : FilmesCadastrados.listagemDeDiretores()) {
+            if (diretor.getNome().equalsIgnoreCase(nome)) {
+                return diretor;
+            }
+        }
+        return null;
     }
 
     private void pesquisarFilme() {
