@@ -1,5 +1,6 @@
 package org.filmes.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,7 @@ public class Filme {
 
     private String nome;
     private Date dataLancamento;
-    private  double orcamento;
+    private String orcamento;
     private String descricao;
     private Diretores diretores;
     private List<Atores> atores = new ArrayList<>();
@@ -16,7 +17,7 @@ public class Filme {
     public Filme() {
     }
 
-    public Filme(String nome, Date dataLancamento, double orcamento, String descricao, Diretores diretores, List<Atores> atores) {
+    public Filme(String nome, Date dataLancamento, String orcamento, String descricao, Diretores diretores, List<Atores> atores) {
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.orcamento = orcamento;
@@ -41,11 +42,11 @@ public class Filme {
         this.dataLancamento = dataLancamento;
     }
 
-    public double getOrcamento() {
+    public String getOrcamento() {
         return orcamento;
     }
 
-    public void setOrcamento(double orcamento) {
+    public void setOrcamento(String orcamento) {
         this.orcamento = orcamento;
     }
 
@@ -71,5 +72,22 @@ public class Filme {
 
     public void setAtores(List<Atores> atores) {
         this.atores = atores;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome: ").append(nome).append("\n");
+        sb.append("Data de Lançamento: ").append(sdf.format(dataLancamento)).append("\n");
+        sb.append("Orçamento: ").append(orcamento).append("\n");
+        sb.append("Descrição: ").append(descricao).append("\n");
+        sb.append("Diretor: ").append(diretores.getNome()).append("\n");
+        sb.append("Atores:\n");
+        for (Atores ator : atores) {
+            sb.append("- ").append(ator.getNome()).append("\n");
+        }
+        sb.append(" ");
+        return sb.toString();
     }
 }
