@@ -1,12 +1,18 @@
 package org.filmes.ui;
 
+import org.filmes.model.Atores;
+import org.filmes.model.Diretores;
 import org.filmes.model.Filme;
 import org.filmes.util.ConsoleUIHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.filmes.util.ConsoleUIHelper.drawWithRightPadding;
+
 
 public class PagedListUI extends BasicUI {
     protected final int PAGE_SIZE;
@@ -109,6 +115,33 @@ public class PagedListUI extends BasicUI {
     }
 
     private void cadastrarFilme() {
+        String nome = ConsoleUIHelper.askSimpleInput("Digite o nome do filme:");
+        String dataLancamentoStr = ConsoleUIHelper.askSimpleInput("Digite a data de lançamento (formato: yyyy-MM-dd):");
+        String orcamento = ConsoleUIHelper.askSimpleInput("Digite o orçamento:");
+        String descricao = ConsoleUIHelper.askSimpleInput("Digite a descrição:");
+        Date dataLancamento = parseDate(dataLancamentoStr);
+
+        String nomeDiretor = ConsoleUIHelper.askSimpleInput("Digite o nome do diretor:");
+        Date dataNascimentoDiretor = parseDate(ConsoleUIHelper.askSimpleInput("Digite a data de nascimento do diretor (formato: yyyy-MM-dd):"));
+        Diretores diretor = new Diretores(nomeDiretor, dataNascimentoDiretor);
+
+        List<Atores> atores = new ArrayList<>();
+        int numeroAtores = Integer.parseInt(ConsoleUIHelper.askSimpleInput("Digite o número de atores a serem cadastrados:"));
+
+        for (int i = 0; i < numeroAtores; i++) {
+            String nomeAtor = ConsoleUIHelper.askSimpleInput("Digite o nome do ator " + (i + 1) + ":");
+            Date dataNascimentoAtor = parseDate(ConsoleUIHelper.askSimpleInput("Digite a data de nascimento do ator " + (i + 1) + " (formato: yyyy-MM-dd):"));
+            Atores ator = new Atores(nomeAtor, dataNascimentoAtor);
+            atores.add(ator);
+        }
+
+        Filme novoFilme = new Filme(nome, dataLancamento, orcamento, descricao, diretor, atores);
+
+        pageSource.cadastrarNovoFilme(novoFilme);
+        dataList = pageSource.listarFilmes(curPage, PAGE_SIZE);
+        totalPages = (int) Math.ceil((double) pageSource.totalFilmes() / PAGE_SIZE);
+
+        ConsoleUIHelper.showMessageAndWait("Filme cadastrado com sucesso!", 2);
     }
 
     private void cadastrarAtor() {
@@ -147,6 +180,15 @@ public class PagedListUI extends BasicUI {
                 drawWithRightPadding(filme.toString(), colunas, ' ');
             }
             ConsoleUIHelper.waitForEnter("Pressione Enter para retornar ao menu principal...");
+        }
+    }
+    private Date parseDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

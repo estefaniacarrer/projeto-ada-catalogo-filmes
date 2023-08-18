@@ -7,6 +7,9 @@ import java.util.List;
 public interface PagedList {
     List<Filme> listarFilmes(int pagina, int tamanhoPagina);
     int totalFilmes();
+
+    void cadastrarNovoFilme(Filme novoFilme);
+
 }
 
 
